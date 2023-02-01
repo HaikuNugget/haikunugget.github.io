@@ -26,10 +26,11 @@ email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   In a browser or on your screen, 
   there’s just something about colored text and esoteric symbols 
-  that attract us to reading it. This website © Copyright 2021-2023 All Rights Reserved.
-  Permission to use code snippets found in code blocks on this site is granted.
-  No warranty expressed or implied. Use at your own risk. Accessing this site content
+  that attract us to reading it. Accessing this site content
   is consent to monitoring meta and keystroke usage. Use at your own risk.
+  This website is © Copyright 2021-2023 All Rights Reserved.
+  Permission to use code snippets found in code blocks on this site is granted.
+  Use at your own risk. No warranty expressed or implied. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
