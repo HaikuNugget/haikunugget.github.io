@@ -1,7 +1,8 @@
 ---
 layout: page
 title: Crocs Here With Words
-permalink: /newpage/technology/word101
+permalink: /newpage/technology/crocs-here-with-words
+order: 12
 ---
 
 This page has wordy crocs; use at your own risk.
