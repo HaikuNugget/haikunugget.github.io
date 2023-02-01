@@ -10,7 +10,7 @@ layout: home
 Remember when you first played snake?
 Maybe you wanted to just not bring on the end of the world by not eating your tail?
 Maybe you wondered how this thing works?  Maybe... you're here because you're searching
-for that intangible means of describing your toughts, a set of instructions, 
+for that intangible means of describing your thoughts, a set of instructions, 
 a story told in a recipe, a tale of two cities or maybe just a loop of fors...
 
 Not all who enter are lost
