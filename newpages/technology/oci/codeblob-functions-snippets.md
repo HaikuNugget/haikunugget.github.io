@@ -93,8 +93,6 @@ Host *.example.com
     MACs hmac-sha2-512
     KexAlgorithms diffie-hellman-group-exchange-sha256
     IdentityFile ~/.ssh/your_special_id_rsa
-
-
 ```
 <!-- ref: https : //diego .assencio .com/? index = 771f fcf2 efe6e fe3e 934d 81cb 6b8 bbfb -->
 
