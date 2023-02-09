@@ -2,10 +2,10 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
+title: "Caymans and other creatures of the Internet"
 layout: home
 ---
 
-## Caymans and other creatures of the Internet
 
 Remember when you first played snake?
 Maybe you wanted to just not bring on the end of the world by not eating your tail?
