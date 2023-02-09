@@ -95,8 +95,9 @@ Host *.example.com
     IdentityFile ~/.ssh/your_special_id_rsa
 
 
-#ref: https : //diego .assencio .com/?index=771ffcf2efe6efe3e934d81cb6b8bbfb
 ```
+<!-- ref: https : //diego .assencio .com/? index = 771f fcf2 efe6e fe3e 934d 81cb 6b8 bbfb -->
+
 When you connect to "singleserver", the parameters set under the singleserver section will take precedence as they are defined 
 earlier in the config file. In other words, the MAC used will be hmac-sha1 (HMAC with SHA-1 as hash function) 
 instead of hmac-sha2-512. Similarly, the block cipher used will be aes128-cbc (AES with CBC as mode of operation and 128-bit long keys) 
