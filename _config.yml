@@ -64,4 +64,4 @@ minima:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-ignore_theme_config: true
+ignore_theme_config: false
