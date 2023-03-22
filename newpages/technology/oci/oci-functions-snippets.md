@@ -122,6 +122,46 @@ function oci-net-subnet-list-DEVTEST-t-terse {
 t-list $i --output=table; done
 }
 
+function oci-net-security-list-egress () {
+    echo "Defaults to PROD NETWORK compartment id hardcoded"
+    # PROD NETWORK
+    COMPARTMENT_ID="ocid1...aaabbbb..ccc"
+    
+    if [[ -n $1 ]]; then
+      COMPARTMENT_ID=$1
+    fi
+    
+    oci network security-list list -c $(COMPARTMENT_ID) --query "data[].\"egress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\".\"destination-port-range\".\"max\", ip_dest:'outbound', z_description:description} | sort_by(@, &ip_dest)" --output=table    
+    #oci network security-list list -c $(COMPARTMENT_ID) --query "data[].\"egress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\".\"destination-port-range\".\"max\", ip_dest:'outbound', z_description:description} | sort_by(@[?not_null(pd_dest_end)], &pd_dest_end)" --output=table
+}
+
+function oci-net-security-list-ingress-new () {
+    echo "Defaults to PROD NETWORK compartment id hardcoded"
+    # PROD NETWORK
+    COMPARTMENT_ID="ocid1...aaabbbb..ccc"
+    
+    if [[ -n $1 ]]; then
+      COMPARTMENT_ID=$1
+    fi   
+    
+
+    NUMBER=$(oci network security-list list -c $COMPARTMENT_ID | jq ".[][].\"display-name\" | length " | wc-l)
+    #oci network security-list list -c ${COMPARTMENT_ID} | jq '.[][] | "\(."display-name")\t\(.name)"'
+
+    for i in $(seq 0 $((${NUMBER} -1))); do
+      SECURITY_LIST_ID=$(oci network security-list list -c ${COMPARTMENT_ID} | jq ".[][2].\"id\"")
+      SECURITY_LIST_DN=$(oci network security-list list -c ${COMPARTMENT_ID} | jq ".[][$i].\"display-name\"")
+      
+      echo "[*] OCID: ${SECURITY_LIST_ID}"
+      echo "[*] DISPLAY_NAME: ${SECURITY_LIST_DN}"
+      
+      oci network security-list list -c ${COMPARTMENT_ID} --query "data[$i].\"ingress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\",\"destination-port-range\".\"max\", ip_dest:'inbound', z_desc:description} | sort_by(@, &ip_source) --output=table
+
+      echo ""
+    done
+}
+
+ 
 # SESSION
 oci-session-authenticate () {
   ### Use this command to auth to an new region and update the ~/.oci/config file.
