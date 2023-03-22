@@ -122,7 +122,7 @@ function oci-net-subnet-list-DEVTEST-t-terse {
 t-list $i --output=table; done
 }
 
-₩# Network oci network security-list
+## Network oci network security-list
 function oci-net-security-list-egress () {
     echo "Defaults to PROD NETWORK compartment id hardcoded"
     # PROD NETWORK
