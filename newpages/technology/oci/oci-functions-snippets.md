@@ -122,6 +122,7 @@ function oci-net-subnet-list-DEVTEST-t-terse {
 t-list $i --output=table; done
 }
 
+₩# Network oci network security-list
 function oci-net-security-list-egress () {
     echo "Defaults to PROD NETWORK compartment id hardcoded"
     # PROD NETWORK
@@ -133,6 +134,18 @@ function oci-net-security-list-egress () {
     
     oci network security-list list -c $(COMPARTMENT_ID) --query "data[].\"egress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\".\"destination-port-range\".\"max\", ip_dest:'outbound', z_description:description} | sort_by(@, &ip_dest)" --output=table    
     #oci network security-list list -c $(COMPARTMENT_ID) --query "data[].\"egress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\".\"destination-port-range\".\"max\", ip_dest:'outbound', z_description:description} | sort_by(@[?not_null(pd_dest_end)], &pd_dest_end)" --output=table
+}
+
+function oci-net-security-list-ingress () (
+  echo "Defaults to PROD NETWORK compartment id hardcoded"
+  #PROD NETWORK
+  COMPARTMENT_ID="ocid1...aaabbbb..ccc"
+
+  if [[ -n $1 ]]; then
+    COMPARTMENT_ID=$1
+  fi  
+
+  oci network security-list list -c ${COMPARTMENT_ID} --query "data[].\"ingress-security-rules\"[].{ip_source:source, p_src_beg:\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\".\"destination-port-range\".\"max\", ip_dest:inbound', z_desc:description} | sort_by(@, &ip_source)" --output=table
 }
 
 function oci-net-security-list-ingress-new () {
