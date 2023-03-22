@@ -155,7 +155,7 @@ function oci-net-security-list-ingress-new () {
       echo "[*] OCID: ${SECURITY_LIST_ID}"
       echo "[*] DISPLAY_NAME: ${SECURITY_LIST_DN}"
       
-      oci network security-list list -c ${COMPARTMENT_ID} --query "data[$i].\"ingress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\",\"destination-port-range\".\"max\", ip_dest:'inbound', z_desc:description} | sort_by(@, &ip_source) --output=table
+      oci network security-list list -c ${COMPARTMENT_ID} --query "data[$i].\"ingress-security-rules\"[].{ip_source:source, p_src_beg:\"tcp-options\".\"source-port-range\".\"min\", p_src_end:\"tcp-options\".\"source-port-range\".\"max\", pd_dest_beg:\"tcp-options\".\"destination-port-range\".\"min\", pd_dest_end:\"tcp-options\",\"destination-port-range\".\"max\", ip_dest:'inbound', z_desc:description} | sort_by(@, &ip_source)" --output=table
 
       echo ""
     done
