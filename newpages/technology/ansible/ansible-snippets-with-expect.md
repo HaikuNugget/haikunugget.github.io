@@ -76,6 +76,8 @@ This file is the ansible playbook and does a few things:
     db_port: "3306"
     db_username: "dbadmin"
     db_password: "alsoNotARealP@ssword1-13r3"
+    unique_owner: '1000'
+    unique_group: '100'
 
   tasks:
 
@@ -83,6 +85,40 @@ This file is the ansible playbook and does a few things:
     file:
       path: /tmp/created-by-ansible
       state: directory
+
+  - name: Create a file in /tmp/unique-003-configfile
+    file:
+      path: /tmp/unique-003-configfile
+      state: touch
+    become: true
+
+  - name: Change a file ownership, group, permissions /tmp/unique-003-configfile
+    ansible.builtin.file:
+      path: /tmp/unique-003-configfile
+      owner: '{{ unique_owner }}'
+      group: '{{ unique_group }}' # could be '100'
+      mode: '0755'
+    become: true
+
+  - name: Copy file with owner and permissions getinput.sh
+    ansible.builtin.copy:
+      src: ./getinput.sh
+      dest: /tmp/getinput.sh
+      owner: '{{ unique_owner }}'
+      group: '{{ unique_group }}' # could be '100'
+      mode: '0755'
+      backup: yes
+    become: true
+
+  - name: Copy file with owner and permissions qbf.txt
+    ansible.builtin.copy:
+      src: ./qbf.txt
+      dest: /tmp/qbf.txt
+      owner: '{{ unique_owner }}'
+      group: '{{ unique_group }}' # could be '100'
+      mode: '0755'
+      backup: yes
+    become: yes
 
   - name: Ping a thing.
     shell:
@@ -113,9 +149,19 @@ This file is the ansible playbook and does a few things:
   #    name:
   #      - python3-pip
 
+  #- name: Install latest pip via yum
+  #  ansible.builtin.yum
+  #    update_cache: yes
+  #    name:
+  #      - python3-pip
+  #    state: latest
+  #  become: true
+
+
   - name: Install pexpect
     pip:
       name: pexpect
+    become: true
 
   - name: "expect example"
     ansible.builtin.expect:
