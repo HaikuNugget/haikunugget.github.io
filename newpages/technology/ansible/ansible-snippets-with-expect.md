@@ -31,7 +31,7 @@ dbhosts:
 expect is driving the bash tool "getinput.sh".
 
 getinput.sh is an example tool taking a 
-  single line of input and outputing the input given.
+  single line of input and outputting the input given.
 ```
 
 The source code is included in the `getinput.sh` example.
