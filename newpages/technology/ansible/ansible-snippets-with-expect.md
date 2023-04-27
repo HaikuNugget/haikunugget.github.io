@@ -75,7 +75,7 @@ This file is the ansible playbook and does a few things:
     executable_filename: "getinput.sh"
     db_port: "3306"
     db_username: "dbadmin"
-    db_password: "D@taB@se#123"
+    db_password: "alsoNotARealP@ssword1-13r3"
 
   tasks:
 
@@ -130,6 +130,7 @@ This file is the ansible playbook and does a few things:
     shell:
         cat qbf.txt| sed 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn/'
         #/usr/bin/sed -i 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn/' qbf.txt
+        # use gsed if on MacOS
     args:
       chdir: /tmp
     register: command_output2
