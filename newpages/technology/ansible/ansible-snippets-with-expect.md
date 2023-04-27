@@ -179,8 +179,8 @@ This file is the ansible playbook and does a few things:
 
   - name: "Sed it up"
     shell:
-        cat qbf.txt| sed 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn/'
-        #/usr/bin/sed -i 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn/' qbf.txt
+        cat qbf.txt| sed 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn\n/'
+        #/usr/bin/sed -i 's/\(The quick brown fox jumped over the lazy yellow dog.\)/&\nJohn\n/' qbf.txt
         # use gsed if on MacOS
     args:
       chdir: /tmp
