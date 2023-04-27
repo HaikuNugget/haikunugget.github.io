@@ -79,6 +79,11 @@ This file is the ansible playbook and does a few things:
 
   tasks:
 
+  - name: Create a directory in /tmp
+    file:
+      path: /tmp/created-by-ansible
+      state: directory
+
   - name: Ping a thing.
     shell:
       ping -c1 localhost 
