@@ -46,6 +46,12 @@ read -p "Please enter your name: " STUFF
 echo $STUFF
 ```
 
+### qbf.txt
+The text file used for the example editing in sed.
+
+```text
+The quick brown fox jumped over the lazy yellow dog.
+```
 
 ### pingsometing_and_expect.txt <br>
 This file is the ansible playbook and does a few things:
@@ -131,3 +137,4 @@ This file is the ansible playbook and does a few things:
   - debug:
       var: command_output2.stdout_lines
 ```
+
