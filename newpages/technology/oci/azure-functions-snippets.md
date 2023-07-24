@@ -28,6 +28,15 @@ function az-account-set-subscription () {
   az account set --subscription $subscriptionID
 }
 
+function az-login-output-tenants-t-terse () {
+  TENANT_ID="abc-def-ghi-jkl-mno"
+  if [[ -n $1 ]]; then
+    TENANT_ID=$1
+  fi
+  echo "[+] Current tenant ID: $TENANT_ID"
+  az login --allow-no-subscriptions --tenant abc-def-ghi-jkl-mno --output table
+}
+
 function az-cloud-list-terse () {
   az cloud list --output table
 }
@@ -38,6 +47,70 @@ function az-vm-show--ssh-publicKeys-terse () {
   az vm show --resource-group ${resource_group} --name ${name} --query "osProfile.linuxConfiguration.ssh.publicKeys" | jq '.[].keyData'
 }
 
+function az-ad-sp-list-all-t-terse_TAKES3MIN () {
+  az-account-list-t-terse
+  az ad sp list --all --output=table
+}
+
+# AZ NETWORK BASTION
+function az-network-bastion-list-t-all () {
+
+  output_type="--output=table"
+  if [[ -n $1 ]]; then
+    output_type="$1"
+  fi
+
+  az network bastion list $output_type
+}
+
+function az-network-bastion-list-t-terse () {
+
+  output_type="--output=table"
+  if [[ -n $1 ]]; then
+    output_type="$1"
+  fi
+
+  az network bastion list --query '[].{disCP:disableCopyPaste, DNSName:dnsName, IPConn:enableIpConnect, Name:name, ResourceGrp:resourceGroup}' $output_type
+}
+
+function az-network-bastion-list-long-t-terse () {
+
+  output_type="--output=table"
+  if [[ -n $1 ]]; then
+    output_type="$1"
+  fi
+
+  az network bastion list --query '[].{ID:id, disCP:disableCopyPaste, DNSName:dnsName, IPConn:enableIpConnect, Name:name, ResourceGrp:resourceGroup}' $output_type 
+
+}
+
+function az-vm-list-running-terse () {
+  az vm list --show-details --query "[?powerState=='VM running'].id" --output tsv
+  # az vm list --resource-group VMResources --show-details --query "[?powerState=='VM running'].id" --output tsv
+
+}
+
+```
+
+```bash
+
+function az-ssh-endpoint () {
+  # source in separately filename ssh-az-endpoints
+
+  TENANT_ID="from-tenantid-tool-above"
+  SUBSCRIPTION_ID="from-subscripiton-id-tool-above"
+
+  az login --tenant $TENANT_ID
+
+  az account set --subscription $SUBSCRIPTION_ID
+
+  sshpass -p "yourpassword" az network bastion ssh --name $name_from_az-network-bastion-long-t-terse \
+  --resource-group $resource_group_from_az-network-bastion-long-t-terse \
+  --target-resource-id $resource_id-looks-like-a-dir-name_from_az-network-bastoin-long-t-terse \
+  --resource-port 22 \
+  --port 6000
+
+}
 ```
 
 ```bash
