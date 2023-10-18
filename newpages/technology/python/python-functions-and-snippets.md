@@ -81,3 +81,22 @@ for tf_blob in cidr_list_subnets_only:
 /data/partition
 /data
 ```
+
+
+#### Pull a JSON blob from a URL
+```python
+#!/usr/bin/env python3
+
+import urllib3
+import json
+
+http = urllib3.PoolManager()
+
+resp = http.request("GET", "https://developer.pagerduty.com/ip-safelists/rest-api-us-service-region-json")
+
+ip_safelist = json.loads(resp.data)
+
+if __name__ == '__main__':
+    for safe_ip in ip_safelist:
+        print(safe_ip)
+```

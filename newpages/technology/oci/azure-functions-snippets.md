@@ -114,6 +114,18 @@ function az-ssh-endpoint () {
 ```
 
 ```bash
+az network lb list --ouptput=table
+
+az network lb show -n lb-name-goes-here-i07fg2ad --resource-group rg-name-goes-here | jq ".backendAddressPools.[0].id"
+
+
+```
+
+```bash
+CertUtil -hashfile .\filename.txt MD5
+```
+
+```bash
 #!/bin/bash
 
 echo "[*] ouput word"
