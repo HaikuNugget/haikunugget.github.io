@@ -121,8 +121,23 @@ az network lb show -n lb-name-goes-here-i07fg2ad --resource-group rg-name-goes-h
 
 ```
 
+az user information
 ```bash
-CertUtil -hashfile .\filename.txt MD5
+az ad user list --filter "userPrincipalName eq 'firstname.lastname@companyname.com'"
+
+az ad signed-in-user show
+```
+
+```bash
+C:\> echo "windows powershell utility for checksum validation of files"
+C:\> CertUtil -hashfile .\filename.txt MD5
+
+C:\> echo "powershell find version of IIS"
+C:\> reg query HKLM\SOFTWARE\Microsoft\InetStp
+...
+VersionString REG_SZ Version 10.0
+...
+
 ```
 
 ```bash
