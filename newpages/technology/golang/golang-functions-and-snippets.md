@@ -40,10 +40,19 @@ func main() {
                 os.Exit(15)
         }
 
+        // output the map header
+        fmt.Fprintf(os.Stdout, "variable \"instances\" {\n")
+        fmt.Fprintf(os.Stdout, "    description = \"The description\"\n")
+        fmt.Fprintf(os.Stdout, "    type        = map(any)\n")
+        fmt.Fprintf(os.Stdout, "    default = {\n")
+        // output the map
         for i := *flStartcount; i <= *flEndcount; i++ {
                 s := fmt.Sprintf("%03d", i)
-                fmt.Fprintf(os.Stdout, "{ var1=%s, var2=%s, var3=%d },\n", s, s, counterA)
+                fmt.Fprintf(os.Stdout, "        \"%s\" = { var1=\"%s\", var2=\"%s\", var3=\"%d\" }\n", s, s, s, counterA)
         }
+        // output the map footer
+        fmt.Fprintf(os.Stdout, "    }\n")
+        fmt.Fprintf(os.Stdout, "}\n")
 }
 
 /*
@@ -53,7 +62,7 @@ variable "users" {
   type = list(object({
     name = string
     age  = number
-        letter = string
+    letter = string
   }))
   default = [
     { name = "person1", age = 20, letter=a },
@@ -61,5 +70,14 @@ variable "users" {
     { name = "person3", age = 40, letter=c },
   ]
 }
+
+variable "instances" {
+        description = "The description"
+        type        = map(any)
+        default = {
+                "008" = { name = "", count="", lengthof="8" }
+        }
+}
 */
 ```
+
