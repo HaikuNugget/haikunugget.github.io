@@ -44,7 +44,6 @@ resource "google_compute_instance" "vm" {
   name         = each.key
   machine_type = each.value
   zone         = "us-central1-a"
-
   // some additional stuff here if needed
 }
 
@@ -58,7 +57,6 @@ resource "google_compute_instance" "vm-multi-value" {
   name         = each.key
   machine_type = each.value.vm_size
   zone         = each.value.zone
-
   // some additional stuff here if needed
 }
 ```
